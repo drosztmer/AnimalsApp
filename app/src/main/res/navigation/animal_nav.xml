@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.codecool.animalsapp.view.ListFragment"
-        android:label="fragment_list"
+        android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list" >
         <action
             android:id="@+id/actionDetail"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.codecool.animalsapp.view.DetailFragment"
-        android:label="fragment_detail"
+        android:label="@string/details_fragment_label"
         tools:layout="@layout/fragment_detail" >
         <action
             android:id="@+id/actionList"
