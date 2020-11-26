@@ -6,21 +6,4 @@
     android:layout_height="match_parent"
     tools:context=".view.ListFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="List fragment" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/button_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/main_margin"
-        android:layout_marginRight="@dimen/main_margin"
-        android:layout_marginBottom="@dimen/main_margin"
-        android:clickable="true"
-        android:src="@drawable/ic_details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
