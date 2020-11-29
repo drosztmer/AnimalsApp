@@ -39,6 +39,14 @@ class ListFragment : Fragment() {
         }
 
         observeViewModel()
+
+        refresh_layout.setOnRefreshListener {
+            animal_list.visibility = View.GONE
+            list_error.visibility = View.GONE
+            loading_view.visibility = View.VISIBLE
+            viewModel.refresh()
+            refresh_layout.isRefreshing = false
+        }
     }
 
     private fun observeViewModel() {
