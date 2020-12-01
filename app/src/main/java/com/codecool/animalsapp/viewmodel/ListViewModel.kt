@@ -1,11 +1,13 @@
 package com.codecool.animalsapp.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.codecool.animalsapp.model.Animal
 import com.codecool.animalsapp.model.AnimalApiService
 import com.codecool.animalsapp.model.ApiKey
+import com.codecool.animalsapp.util.SharedPreferencesHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
@@ -21,7 +23,21 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     private val disposable = CompositeDisposable()
     private val apiService = AnimalApiService()
 
+    private val prefs = SharedPreferencesHelper(getApplication())
+
+    private var invalidApiKey = false
+
     fun refresh () {
+        invalidApiKey = false
+        val key = prefs.getApiKey()
+        if (key.isNullOrEmpty()) {
+            getKey()
+        } else {
+            getAnimals(key)
+        }
+    }
+
+    fun hardRefresh() {
         getKey()
     }
 
@@ -32,20 +48,26 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
             apiService.getApiKey()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<ApiKey>(){
+                .subscribeWith(object : DisposableSingleObserver<ApiKey>() {
                     override fun onSuccess(key: ApiKey) {
                         if (key.key.isNullOrEmpty()) {
                             loadError.value = true
                             loading.value = false
                         } else {
+                            prefs.saveApiKey(key.key)
                             getAnimals(key.key)
                         }
                     }
 
                     override fun onError(e: Throwable) {
-                        e.printStackTrace()
-                        loading.value = false
-                        loadError.value = true
+                        if (!invalidApiKey) {
+                            invalidApiKey = true
+                            getKey()
+                        } else {
+                            e.printStackTrace()
+                            loading.value = false
+                            loadError.value = true
+                        }
                     }
 
                 })

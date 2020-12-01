@@ -1,12 +1,11 @@
-package com.codecool.animalsapp
+package com.codecool.animalsapp.util
 
 import android.content.Context
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.codecool.animalsapp.util.CENTER_RADIUS
-import com.codecool.animalsapp.util.STROKE_WIDTH
+import com.codecool.animalsapp.R
 
 fun getProgressDrawable(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {

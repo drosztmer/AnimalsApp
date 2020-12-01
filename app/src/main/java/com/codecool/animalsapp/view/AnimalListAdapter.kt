@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.animalsapp.R
-import com.codecool.animalsapp.getProgressDrawable
-import com.codecool.animalsapp.loadImage
+import com.codecool.animalsapp.util.getProgressDrawable
+import com.codecool.animalsapp.util.loadImage
 import com.codecool.animalsapp.model.Animal
 import kotlinx.android.synthetic.main.item_animal.view.*
 
