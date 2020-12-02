@@ -3,10 +3,12 @@ package com.codecool.animalsapp.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.animalsapp.R
+import com.codecool.animalsapp.databinding.ItemAnimalBinding
 import com.codecool.animalsapp.util.getProgressDrawable
 import com.codecool.animalsapp.util.loadImage
 import com.codecool.animalsapp.model.Animal
@@ -23,25 +25,21 @@ class AnimalListAdapter(private val animalList: ArrayList<Animal>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_animal, parent, false)
+        val view = DataBindingUtil.inflate<ItemAnimalBinding>(inflater, R.layout.item_animal, parent, false)
         return AnimalViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
-        holder.itemView.animal_name.text = animalList[position].name
-        holder.itemView.animal_image.loadImage(
-            animalList[position].imageUrl,
-            getProgressDrawable(holder.itemView.context)
-        )
-        holder.itemView.animal_layout.setOnClickListener {
-            val action = ListFragmentDirections.actionDetail(animalList[position])
-            holder.itemView.findNavController().navigate(action)
-        }
+        holder.bind(animalList[position])
+
     }
 
     override fun getItemCount() = animalList.size
 
-    class AnimalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-
+    class AnimalViewHolder(val binding: ItemAnimalBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(animal: Animal) {
+            binding.animal = animal
+            binding.executePendingBindings()
+        }
     }
 }
