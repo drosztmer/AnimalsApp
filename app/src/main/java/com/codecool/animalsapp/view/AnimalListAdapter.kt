@@ -3,6 +3,8 @@ package com.codecool.animalsapp.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.codecool.animalsapp.R
 import com.codecool.animalsapp.util.getProgressDrawable
@@ -31,6 +33,10 @@ class AnimalListAdapter(private val animalList: ArrayList<Animal>) :
             animalList[position].imageUrl,
             getProgressDrawable(holder.itemView.context)
         )
+        holder.itemView.animal_layout.setOnClickListener {
+            val action = ListFragmentDirections.actionDetail(animalList[position])
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount() = animalList.size
