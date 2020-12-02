@@ -26,5 +26,8 @@
             app:destination="@id/listFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <argument
+            android:name="animal"
+            app:argType="com.codecool.animalsapp.model.Animal" />
     </fragment>
 </navigation>
