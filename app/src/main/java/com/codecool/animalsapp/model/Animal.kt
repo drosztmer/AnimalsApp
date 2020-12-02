@@ -1,12 +1,15 @@
 package com.codecool.animalsapp.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class ApiKey(
     val message: String?,
     val key: String?
 )
 
+@Parcelize
 data class Animal (
     val name: String?,
     val taxonomy: Taxonomy?,
@@ -17,15 +20,17 @@ data class Animal (
     val lifeSpan: String?,
     @SerializedName("image")
     val imageUrl: String?
-)
+): Parcelable
 
+@Parcelize
 data class Taxonomy(
     val kingdom: String?,
     val order: String?,
     val family: String?
-)
+): Parcelable
 
+@Parcelize
 data class Speed(
     val metric: String?,
     val imperial: String?
-)
+): Parcelable
