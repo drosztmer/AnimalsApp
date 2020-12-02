@@ -44,7 +44,7 @@ class ListFragment : Fragment() {
             animal_list.visibility = View.GONE
             list_error.visibility = View.GONE
             loading_view.visibility = View.VISIBLE
-            viewModel.refresh()
+            viewModel.hardRefresh()
             refresh_layout.isRefreshing = false
         }
     }
