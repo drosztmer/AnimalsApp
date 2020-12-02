@@ -15,6 +15,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.codecool.animalsapp.R
 import com.codecool.animalsapp.databinding.FragmentDetailBinding
+import com.codecool.animalsapp.model.AnimalPalette
 import com.codecool.animalsapp.util.getProgressDrawable
 import com.codecool.animalsapp.util.loadImage
 
@@ -48,7 +49,7 @@ class DetailFragment : Fragment() {
                     Palette.from(resource)
                         .generate() { palette ->
                             val intColor = palette?.lightMutedSwatch?.rgb ?: 0
-                            dataBinding.animalLayout.setBackgroundColor(intColor)
+                            dataBinding.palette = AnimalPalette(intColor)
                         }
                 }
 

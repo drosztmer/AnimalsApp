@@ -7,13 +7,16 @@
         <variable
             name="animal"
             type="com.codecool.animalsapp.model.Animal" />
+        <variable
+            name="palette"
+            type="com.codecool.animalsapp.model.AnimalPalette" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/animal_layout"
         android:orientation="vertical"
+        android:background="@{palette.color}"
         tools:context=".view.DetailFragment"
         android:gravity="center_horizontal">
 
