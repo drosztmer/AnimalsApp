@@ -76,12 +76,15 @@ dependencies {
     implementation "androidx.palette:palette-ktx:1.0.0"
 
     // Dagger
-    implementation 'com.google.dagger:dagger:2.30.1'
-    kapt 'com.google.dagger:dagger-compiler:2.30.1'
+    implementation 'com.google.dagger:dagger:2.14.1'
+    implementation 'com.google.dagger:dagger-android-support:2.14.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt 'com.google.dagger:dagger-compiler:2.14.1'
+    kapt 'com.google.dagger:dagger-android-processor:2.14.1'
 
     // Mockito, Testing
     testImplementation "org.mockito:mockito-inline:2.11.0"
     testImplementation "android.arch.core:core-testing:1.1.1"
-    kaptTest "com.google.dagger:dagger-compiler:2:30.1"
+    kaptTest "com.google.dagger:dagger-compiler:2.14.1"
 
 }
