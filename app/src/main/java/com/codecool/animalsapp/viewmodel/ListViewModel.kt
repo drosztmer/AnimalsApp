@@ -48,6 +48,7 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun refresh () {
+        loading.value = true
         inject()
         invalidApiKey = false
         val key = prefs.getApiKey()
@@ -59,13 +60,12 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     }
 
     fun hardRefresh() {
+        loading.value = true
         inject()
         getKey()
     }
 
     private fun getKey() {
-        loading.value = true
-
         disposable.add(
             apiService.getApiKey()
                 .subscribeOn(Schedulers.newThread())
@@ -82,14 +82,9 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
-                        if (!invalidApiKey) {
-                            invalidApiKey = true
-                            getKey()
-                        } else {
-                            e.printStackTrace()
-                            loading.value = false
-                            loadError.value = true
-                        }
+                        e.printStackTrace()
+                        loading.value = false
+                        loadError.value = true
                     }
 
                 })
@@ -109,10 +104,15 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
                     }
 
                     override fun onError(e: Throwable) {
-                        e.printStackTrace()
-                        loading.value = false
-                        animals.value = null
-                        loadError.value = true
+                        if(!invalidApiKey) {
+                            invalidApiKey = true
+                            getKey()
+                        } else {
+                            e.printStackTrace()
+                            loading.value = false
+                            animals.value = null
+                            loadError.value = true
+                        }
                     }
 
                 })
